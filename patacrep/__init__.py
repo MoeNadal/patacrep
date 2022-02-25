@@ -10,7 +10,7 @@ if sys.version_info < (3, 9):
     sys.exit(1)
 
 # Patacrep version.
-__TUPLE_VERSION__ = (5, 2, 0)
+__TUPLE_VERSION__ = (5, 2, 1)
 __version__ = '.'.join([str(number) for number in __TUPLE_VERSION__])
 
 # Directory containing shared data (default templates, custom LaTeX packages,
