@@ -47,14 +47,16 @@
 \cover
 (* endif *)
 
-(*- for chord in metadata['define'] -*)
-  (( render(chord) ))
-(* endfor *)
+
 
 (*- if metadata.capo is defined -*)
   \capo{(( metadata.capo ))}
 (* endif *)
 
 (* include 'song_body' *)
+
+(*- for chord in metadata['define'] -*)
+  (( render(chord) ))
+(* endfor *)
 
 \endsong
