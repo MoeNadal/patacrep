@@ -102,7 +102,7 @@ class ChordproParser(Parser):
             frets = None
         else:
             frets = []
-            for fret in groups['frets'].split():
+            for fret in groups['frets']:
                 if fret in "xX":
                     frets.append(None)
                 else:
