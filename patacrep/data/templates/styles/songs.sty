@@ -1014,7 +1014,7 @@
   \tiny\extendpostlude%
 }
 \newcommand\showauthors{%
-  \setbox\SB@box\hbox{\bfseries\sfcode`.\@m\songauthors}%
+  \parbox{20em}\setbox\SB@box\hbox{\bfseries\sfcode`.\@m\songauthors}%
   \ifdim\wd\SB@box>\z@\unhbox\SB@box\par\fi%
 }
 \newcommand\showrefs{%
