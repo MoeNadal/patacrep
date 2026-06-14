@@ -7,7 +7,7 @@ import glob
 import os
 import unittest
 
-from pkg_resources import resource_filename
+import importlib.resources
 
 from patacrep import files
 from patacrep.tools.__main__ import main as tools_main
@@ -49,7 +49,7 @@ class TestConvert(unittest.TestCase, metaclass=dynamic.DynamicTest):
                                 )
                             expected = controlfile.read().strip().replace(
                                 "@TEST_FOLDER@",
-                                files.path2posix(resource_filename(__name__, "")),
+                                files.path2posix(str(importlib.resources.files(__name__))),
                                 )
                             with open_read(destname) as destfile:
                                 self.assertMultiLineEqual(
@@ -79,7 +79,7 @@ class TestConvert(unittest.TestCase, metaclass=dynamic.DynamicTest):
     @contextlib.contextmanager
     def chdir(*pathlist):
         """Temporary change current directory, relative to this file directory"""
-        with files.chdir(resource_filename(__name__, ""), *pathlist):
+        with files.chdir(str(importlib.resources.files(__name__)), *pathlist):
             yield
 
     @classmethod

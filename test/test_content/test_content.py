@@ -7,7 +7,7 @@ import os
 import unittest
 import yaml
 
-from pkg_resources import resource_filename
+import importlib.resources
 
 from patacrep import content, files
 from patacrep.songbook import prepare_songbook
@@ -75,7 +75,7 @@ class FileTest(unittest.TestCase, metaclass=dynamic.DynamicTest):
         if not isinstance(elem, dict):
             return elem
 
-        test_path = files.path2posix(resource_filename(__name__, ""))+"/"
+        test_path = files.path2posix(str(importlib.resources.files(__name__)))+"/"
         for key in ['song', 'tex']:
             if key in elem:
                 elem[key] = files.path2posix(

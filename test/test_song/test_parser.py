@@ -6,7 +6,7 @@ import contextlib
 import glob
 import os
 import unittest
-from pkg_resources import resource_filename
+import importlib.resources
 
 from patacrep import files
 from patacrep.encoding import open_read
@@ -49,7 +49,7 @@ class FileTest(unittest.TestCase, metaclass=dynamic.DynamicTest):
     @contextlib.contextmanager
     def chdir(*path):
         """Temporary change current directory, relative to this file directory"""
-        with files.chdir(resource_filename(__name__, ""), *path):
+        with files.chdir(str(importlib.resources.files(__name__)), *path):
             yield
 
     def assertRender(self, base, in_format, out_format): # pylint: disable=invalid-name
@@ -63,7 +63,7 @@ class FileTest(unittest.TestCase, metaclass=dynamic.DynamicTest):
                     song = self.song_renderer[out_format][in_format](sourcename, self.config)
                     expected = expectfile.read().strip().replace(
                         "@TEST_FOLDER@",
-                        files.path2posix(resource_filename(__name__, "")),
+                        files.path2posix(str(importlib.resources.files(__name__))),
                         )
                     self.assertMultiLineEqual(
                         song.render().strip(),
